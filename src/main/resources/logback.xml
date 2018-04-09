@@ -1,0 +1,39 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/application.log</file>
+        <encoder>
+            <!--pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern-->
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %thread %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/application.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>5</maxHistory>
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <root value="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <logger name="liquibase.ext.logging" level="WARN">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="com.redsoft.gda" additivity="false" level="INFO">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="liquibase" level="ERROR"/>
+    <logger name="com.zaxxer.hikari" level="ERROR"/>
+
+</configuration>

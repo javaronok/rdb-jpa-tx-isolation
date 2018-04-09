@@ -1,0 +1,19 @@
+spring:
+    application:
+        name: jpa-tx-test
+    datasource:
+        driver-class-name: org.firebirdsql.jdbc.FBDriver
+        url: jdbc:firebirdsql://localhost:3050/jpa-tx-test
+        username: sysdba
+        password: masterkey
+        hikari:
+          connection-timeout: 60000
+          maximum-pool-size: 5
+    jpa:
+      database-platform: org.hibernate.dialect.FirebirdDialect
+      show-sql: true
+      hibernate:
+        ddl-auto: validate
+      properties:
+        hibernate:
+          format_sql: false
